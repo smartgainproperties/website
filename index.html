@@ -1,72 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coming Soon | Smart Gain Properties</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #5b6e5f;
-      color: #fff;
+      background: linear-gradient(to right, #0f4d38, #a8e84b);
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      text-align: center;
-      flex-direction: column;
       overflow: hidden;
+      text-align: center;
       padding: 1rem;
     }
 
+    .card-container {
+      perspective: 1200px;
+    }
+
+    .card {
+      width: 100%; max-width: 800px; height: 500px; position: relative; transform-style: preserve-3d; transition: transform 0.8s;
+      max-width: 800px;
+      height: 500px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      position: relative;
+    }
+
+    .card-container:hover .card {
+      transform: rotateY(180deg);
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-side {
+      position: absolute;
+      width: 100%;
+      height: 500px;
+      backface-visibility: hidden;
+      padding: 3rem;
+      border-radius: 20px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;
+    }
+
+    .card-front {
+      background: rgba(15, 77, 56, 0.7);
+    }
+
+    .card-back {
+      background: rgba(15, 77, 56, 0.9);
+      transform: rotateY(180deg);
+    }
+
     img.logo {
-      width: 500px;
-      max-width: 100%;
-      margin-bottom: 3rem;
-      animation: fadeIn 1s ease-in, pulse 4s infinite;
-      filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
+      width: 320px;
+      max-width: 80%;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
     }
 
     p {
-      font-size: 1.5rem;
-      animation: fadeIn 2s ease-in;
-      line-height: 2;
-      margin-bottom: 3rem;
-      max-width: 700px;
-      animation: pulse 5s infinite;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #eaeaea;
+      margin-bottom: 2rem;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.85; }
-      100% { opacity: 1; }
+    .contact {
+      font-size: 1rem;
+      color: #f0f0f0;
     }
 
     @media (max-width: 600px) {
-      img.logo { width: 280px; }
+      .card-side { padding: 2rem; }
+      h1 { font-size: 1.6rem; }
       p { font-size: 1rem; }
+      img.logo { width: 220px; }
     }
   </style>
 </head>
 <body>
-  <img src="logo.png" alt="Smart Gain Properties Logo" class="logo" />
-  <p>
-    ✨ <strong>Something incredible is coming your way!</strong><br><br>
-    We're cooking up a brand-new digital space to help you discover property opportunities with confidence.<br><br>
-    <strong>Welcome to Smart Gain Properties</strong> — where <em>Yields meet Growth</em>.<br><br>
-    Meanwhile, feel free to reach out to us — we’d love to hear from you. 📞
-  </p>
-
-  <div style="font-size: 1rem; line-height: 1.8; color: #eaeaea;">
-    <p>📞 Contact us: <strong>0456 002 189</strong><br>
-    📧 Email: <strong>manjil@smartgainproperties.com.au</strong><br>
-    📍 Based in Sydney, Australia</p>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-side card-front">
+        <img src="logo.png" alt="Smart Gain Properties Logo" class="logo">
+        <h1>🚀 Something Incredible Is Coming</h1>
+        <p>
+          We’re building a smarter, sleeker platform for ambitious property buyers. <br>
+          <strong>Welcome to Smart Gain Properties</strong> — where <em>Yields meet Growth</em>.
+        </p>
+      </div>
+      <div class="card-side card-back">
+        <h1>📞 Get in Touch</h1>
+        <p class="contact">
+          Phone: <strong>0400 123 456</strong><br>
+          Email: <strong>hello@smartgainproperties.com.au</strong><br>
+          Location: Australia
+        </p>
+      </div>
+    </div>
   </div>
 </body>
 </html>
