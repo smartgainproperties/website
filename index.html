@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon | Smart Gain Properties</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #5b6e5f;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    img.logo {
+      width: 500px;
+      max-width: 100%;
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease-in, pulse 4s infinite;
+      filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
+    }
+
+    p {
+      font-size: 1.5rem;
+      animation: fadeIn 2s ease-in;
+      line-height: 2;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      animation: pulse 5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      img.logo { width: 280px; }
+      p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Smart Gain Properties Logo" class="logo" />
+  <p>
+    ✨ <strong>Something incredible is coming your way!</strong><br><br>
+    We're cooking up a brand-new digital space to help you discover property opportunities with confidence.<br><br>
+    <strong>Welcome to Smart Gain Properties</strong> — where <em>Yields meet Growth</em>.<br><br>
+    Meanwhile, feel free to reach out to us — we’d love to hear from you. 📞
+  </p>
+
+  <div style="font-size: 1rem; line-height: 1.8; color: #eaeaea;">
+    <p>📞 Contact us: <strong>0456 002 189</strong><br>
+    📧 Email: <strong>manjil@smartgainproperties.com.au</strong><br>
+    📍 Based in Sydney, Australia</p>
+  </div>
+</body>
+</html>
