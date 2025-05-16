@@ -92,25 +92,32 @@
 
     @media (max-width: 600px) {
   .card {
-    height: auto;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
+    height: 500px;
+    transform-style: preserve-3d;
+    display: block;
   }
   .card-container {
-    perspective: none;
+    perspective: 1200px;
   }
   .card-side {
-    position: relative;
-    transform: none !important;
-    backface-visibility: visible;
-    padding: 1.5rem;
-    border-radius: 0;
-    height: auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 2rem;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   .card-back {
-    margin-top: 2rem;
-    transform: none !important;
+    transform: rotateY(180deg);
+    margin-top: 0;
+  }
+  #flipBtn {
+    display: block !important;
   }
   h1 {
     font-size: 1.6rem;
@@ -122,6 +129,7 @@
     width: 220px;
   }
 }
+  
   </style>
 
 </head>
@@ -174,7 +182,7 @@ typeWriter();
 // Flip button toggle for touch devices
 const card = document.querySelector('.card');
 const flipBtn = document.getElementById('flipBtn');
-if (window.innerWidth < 768) {
+if (window.innerWidth <= 1024) {
   flipBtn.style.display = 'block';
   let flipped = false;
   flipBtn.onclick = () => {
