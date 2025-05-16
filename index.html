@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,5 +153,33 @@
       <img src="linkedin.svg" alt="LinkedIn" style="width: 32px; height: 32px;" />
     </a>
   </div>
+<script>
+// Typewriter animation
+const typeTarget = document.querySelector(".card-front h1");
+const originalText = typeTarget.textContent.trim();
+typeTarget.textContent = "";
+let i = 0;
+function typeWriter() {
+  if (i < originalText.length) {
+    typeTarget.textContent += originalText.charAt(i);
+    i++;
+    setTimeout(typeWriter, 60);
+  }
+}
+typeWriter();
+
+// Flip button toggle for touch devices
+const card = document.querySelector('.card');
+const flipBtn = document.getElementById('flipBtn');
+if (window.innerWidth < 768) {
+  flipBtn.style.display = 'block';
+  let flipped = false;
+  flipBtn.onclick = () => {
+    card.style.transform = flipped ? 'none' : 'rotateY(180deg)';
+    flipBtn.textContent = flipped ? 'Show Contact' : 'Show Info';
+    flipped = !flipped;
+  };
+}
+</script>
 </body>
 </html>
