@@ -91,10 +91,35 @@
     }
 
     @media (max-width: 600px) {
-      .card-side { padding: 1.5rem; }
-      h1 { font-size: 1.6rem; }
-      p { font-size: 1rem; }
-      img.logo { width: 220px; }
+      .card {
+        height: auto;
+        transform: none !important;
+        display: flex;
+        flex-direction: column;
+      }
+      .card-container {
+        perspective: none;
+      }
+      .card-side {
+        position: relative;
+        transform: none !important;
+        backface-visibility: visible;
+        padding: 1.5rem;
+        border-radius: 0;
+        height: auto;
+      }
+      .card-back {
+        margin-top: 2rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      img.logo {
+        width: 220px;
+      }
     }
   </style>
 </head>
@@ -104,8 +129,7 @@
       <div class="card-side card-front">
         <img src="logo.png" alt="Smart Gain Properties Logo" class="logo">
         <h1>🚀 Something Incredible Is Coming</h1>
-        <p>We’re building a smarter, sleeker platform for ambitious property buyers. <strong>Welcome to Smart Gain Properties</strong> — where <em>Yields meet Growth</em>.
-        </p>
+        <p>We’re building a smarter, sleeker platform for ambitious property buyers. <strong>Welcome to Smart Gain Properties</strong> — where <em>Yields meet Growth</em>.</p>
       </div>
       <div class="card-side card-back">
         <h1>📞 Get in Touch</h1>
