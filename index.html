@@ -77,11 +77,19 @@
       gap: 1rem;
     }
 
+    .logo-container {
+      background: rgba(255, 255, 255, 0.08); /* subtle translucent panel */
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 1rem;
+    }
+
     img.logo {
       width: 420px;
       max-width: 100%;
-      filter: drop-shadow(0 12px 24px rgba(3, 15, 11, 0.55));
-      margin-bottom: 0.4rem;
+      display: block;
     }
 
     h1 {
@@ -207,7 +215,9 @@
   <div class="card-container">
     <div class="card">
       <div class="card-side card-front">
-        <img src="Logo and Text Primary 01.png" alt="Smart Gain Properties Logo" class="logo"/>
+        <div class="logo-container">
+          <img src="Logo and Text Primary 01.png" alt="Smart Gain Properties Logo" class="logo"/>
+        </div>
         <h1>
           🚀 <span class="highlight">Smart Returns</span>
           <span class="type"> Are Coming Soon</span>
