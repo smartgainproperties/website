@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Gain Properties • Cashflow Portal</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* Smart Gain Properties themed styling */
+:root{
+  --green: #1B4332;   /* Smart Green */
+  --gold:  #D4AF37;   /* Smart Yellow */
+  --teal: #A3C9C0;    /* Soft Teal */
+  --taupe: #B8A392;   /* Warm Taupe */
+  --ivory: #F1EDEB;   /* Pale Ivory */
+  --slate: #6D7A7D;   /* Slate Grey */
+
+  --bg: #F1EDEB;
+  --card: #FFFFFF;
+  --cardTint: rgba(27,67,50,.05);
+  --text: #101412;
+  --muted: rgba(16,20,18,.72);
+  --line: rgba(27,67,50,.16);
+  --radius: 18px;
+  --shadow: 0 14px 35px rgba(0,0,0,.08);
+  --font-head: "Host Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+}
+body{
+  margin:0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(1100px 720px at 12% 0%, rgba(27,67,50,.15), transparent 52%),
+    radial-gradient(900px 520px at 88% 10%, rgba(212,175,55,.16), transparent 55%),
+    linear-gradient(140deg, rgba(163,201,192,.30), rgba(241,237,235,.85));
+}
+.pattern{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .10;
+  background:
+    linear-gradient(135deg, rgba(27,67,50,.22) 25%, transparent 25%) 0 0/30px 30px,
+    linear-gradient(225deg, rgba(212,175,55,.22) 25%, transparent 25%) 0 0/30px 30px;
+  mask-image: radial-gradient(circle at 75% 30%, rgba(0,0,0,1), rgba(0,0,0,.2) 55%, rgba(0,0,0,0) 78%);
+}
+.wrap{
+  max-width: 1120px;
+  margin: 34px auto;
+  padding: 0 16px 46px;
+  position: relative;
+  z-index: 1;
+}
+header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.brandline{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.brandLogo{
+  height: 52px;
+  width: auto;
+  display:block;
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.12));
+}
+.brandline .b{
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: .3px;
+  font-family: var(--font-head);
+  text-transform: uppercase;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  background: linear-gradient(90deg, rgba(27,67,50,.12), rgba(212,175,55,.20));
+  color: var(--green);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(27,67,50,.18);
+}
+.eyebrow .dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212,175,55,.12);
+}
+.title h1{
+  margin:0;
+  font-size: 28px;
+  letter-spacing: .2px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  color: var(--green);
+}
+.title p{
+  margin:8px 0 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 820px;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  margin-top: 4px;
+}
+button{
+  background: rgba(27,67,50,.06);
+  color: var(--green);
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor:pointer;
+  transition: transform .05s ease, background .2s ease, filter .2s ease;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--font-body);
+}
+button:hover{ background: rgba(27,67,50,.09); }
+button:active{ transform: translateY(1px); }
+.btnPrimary{
+  background: linear-gradient(135deg, var(--green), #0f2a1f 40%, var(--gold));
+  border: 1px solid rgba(212,175,55,.35);
+  color: white;
+  box-shadow: 0 12px 26px rgba(27,67,50,.18);
+}
+.btnPrimary:hover{ filter: brightness(1.03); }
+.grid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 16px;
+}
+@media (max-width: 960px){
+  .grid{ grid-template-columns: 1fr; }
+  .actions{ justify-content:flex-start; }
+}
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.card .head{
+  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(27,67,50,.06), transparent);
+  border-bottom: 1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.card .head h2{
+  margin:0;
+  font-size: 13px;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 900;
+  font-family: var(--font-head);
+}
+.badge{
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(16,20,18,.75);
+  background: rgba(27,67,50,.06);
+  border: 1px solid rgba(27,67,50,.16);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.content{ padding: 12px 16px 16px; }
+.table{ width:100%; border-collapse: collapse; border-spacing: 0; }
+.table th, .table td{ padding: 10px 8px; border-bottom: 1px solid rgba(27,67,50,.10); vertical-align: middle; }
+.table th{
+  text-align:left;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: .25px;
+  text-transform: uppercase;
+  font-family: var(--font-head);
+}
+.label{ font-weight: 700; font-size: 13px; }
+.hint{ display:block; margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.25; }
+input, select{
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid rgba(27,67,50,.22);
+  color: var(--text);
+  padding: 10px 10px;
+  border-radius: 12px;
+  outline: none;
+  font-size: 13px;
+  font-family: var(--font-body);
+}
+input::placeholder{ color: rgba(16,20,18,.40); }
+input:focus, select:focus{
+  border-color: rgba(27,67,50,.55);
+  box-shadow: 0 0 0 3px rgba(27,67,50,.10);
+}
+.row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.row3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+@media (max-width: 720px){ .row3{ grid-template-columns: 1fr; } }
+@media (max-width: 520px){ .row2{ grid-template-columns: 1fr; } }
+.kpi{ display:grid; grid-template-columns: 1fr; gap: 10px; }
+.kpiCard{
+  background: linear-gradient(180deg, var(--cardTint), #fff);
+  border: 1px solid rgba(27,67,50,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+}
+.kpiCard .k{
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .25px;
+  margin-bottom: 6px;
+  font-weight: 900;
+  font-family: var(--font-head);
+}
+.kpiCard .v{
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  color: var(--green);
+}
+.kpiHero{
+  border: 1px solid rgba(212,175,55,.35);
+  box-shadow: 0 10px 26px rgba(212,175,55,.10);
+  background: linear-gradient(135deg, rgba(27,67,50,.06), rgba(212,175,55,.10));
+}
+.split{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 960px){ .split{ grid-template-columns: 1fr; } }
+.footerNote{ color: var(--muted); font-size: 12px; margin-top: 12px; line-height: 1.4; }
+.tiny{ font-size: 11px; color: var(--muted); font-family: var(--mono); }
+.hr{ height: 1px; background: rgba(27,67,50,.12); margin: 10px 0 0; }
+
+  </style>
+</head>
+
+<body>
+  <div class="pattern" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="brandline">
+          <img src="Logo Full - Color.png" alt="Smart Gain Properties logo" class="brandLogo">
+          <div class="b">SMART GAIN PROPERTIES</div>
+        </div>
+        <div class="eyebrow"><span class="dot" aria-hidden="true"></span>Cashflow &amp; Portfolio Snapshot</div>
+
+        <h1>Investment Cashflow Portal</h1>
+        <p>
+          Percent fields accept either <b>20</b> or <b>0.20</b>. LMI + stamp duty are auto (estimate).
+          Depreciation is auto-estimated. Tax deductible ratio defaults to <b>100%</b>.
+          Loan is <b>P&amp;I from day 1</b>.
+        </p>
+      </div>
+
+      <div class="actions">
+        <button id="btnReset">Reset</button>
+        <button class="btnPrimary" id="btnExport">Copy Inputs</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="head">
+          <h2>Inputs</h2>
+          <span class="badge">Editable</span>
+        </div>
+
+        <div class="content">
+          <table class="table" aria-label="inputs">
+            <tbody>
+              <tr>
+                <td class="label">Property Address</td>
+                <td><input id="address" type="text" placeholder="5 Henschke Court, Caboolture QLD 4510"></td>
+              </tr>
+
+              <tr>
+                <td class="label">State</td>
+                <td>
+                  <select id="state">
+                    <option>QLD</option><option>NSW</option><option>VIC</option><option>SA</option>
+                    <option>WA</option><option>TAS</option><option>ACT</option><option>NT</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr><td class="label">Purchase Price</td><td><input id="purchasePrice" type="number" min="0" step="1000" placeholder="565000"></td></tr>
+              <tr><td class="label">Deposit %</td><td><input id="depositPct" type="number" min="0" step="0.01" placeholder="20"></td></tr>
+              <tr><td class="label">Interest Rate % (p.a.)</td><td><input id="interestRate" type="number" min="0" step="0.0001" placeholder="5.5"></td></tr>
+              <tr><td class="label">Loan Term (years)</td><td><input id="loanTermYears" type="number" min="1" step="1" placeholder="30"></td></tr>
+
+              <tr>
+                <td colspan="2">
+                  <div class="row2">
+                    <div>
+                      <label class="tiny">Rent / week</label>
+                      <input id="rentWeek" type="number" min="0" step="5" placeholder="550">
+                    </div>
+                    <div>
+                      <label class="tiny">Rental Commission %</label>
+                      <input id="rentComm" type="number" min="0" step="0.01" placeholder="8">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <div class="row2">
+                    <div>
+                      <label class="tiny">Council Rate / yr</label>
+                      <input id="councilYr" type="number" min="0" step="50" placeholder="4000">
+                    </div>
+                    <div>
+                      <label class="tiny">Building Insurance / yr</label>
+                      <input id="buildingInsYr" type="number" min="0" step="50" placeholder="1500">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <div class="row2">
+                    <div>
+                      <label class="tiny">Landlord Insurance / yr</label>
+                      <input id="landlordInsYr" type="number" min="0" step="50" placeholder="500">
+                    </div>
+                    <div>
+                      <label class="tiny">Maintenance / yr</label>
+                      <input id="maintenanceYr" type="number" min="0" step="50" placeholder="3000">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr><td class="label">Accounting Fees / yr</td><td><input id="accountingYr" type="number" min="0" step="50" placeholder="0"></td></tr>
+              <tr><td class="label">Super Contribution / yr</td><td><input id="superYr" type="number" min="0" step="50" placeholder="0"></td></tr>
+
+              <tr>
+                <td colspan="2">
+                  <div class="row2">
+                    <div>
+                      <label class="tiny">Building Value %</label>
+                      <input id="buildingValuePct" type="number" min="0" step="0.1" placeholder="70">
+                      <span class="hint">Used only for depreciation estimate</span>
+                    </div>
+                    <div>
+                      <label class="tiny">Depreciation Rate %</label>
+                      <input id="deprRatePct" type="number" min="0" step="0.1" placeholder="2.5">
+                      <span class="hint">2.5% is a common estimate</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr><td class="label">Tax Deductible Ratio %</td><td><input id="taxDeductRatio" type="number" min="0" step="0.01" placeholder="100"></td></tr>
+              <tr><td class="label">Marginal Tax Rate %</td><td><input id="taxRate" type="number" min="0" step="0.01" placeholder="30"></td></tr>
+            </tbody>
+          </table>
+
+          <div class="footerNote">Tip: enter <b>5.5</b> (or <b>0.055</b>) for Interest Rate.</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="head">
+          <h2>Outputs</h2>
+          <span class="badge">Auto calculated</span>
+        </div>
+
+        <div class="content">
+          <div class="kpi">
+            <div class="kpiCard kpiHero">
+              <div class="k">Cash Required</div>
+              <div class="v" id="outCashRequired">$0</div>
+              <div class="hint" id="outCashRequiredSub">Deposit + LMI + stamp duty</div>
+            </div>
+
+            <div class="split">
+              <div class="kpiCard">
+                <div class="k">Monthly Repayment (P&amp;I)</div>
+                <div class="v" id="outMonthlyPAndI">$0</div>
+              </div>
+              <div class="kpiCard">
+                <div class="k">Interest portion (month 1)</div>
+                <div class="v" id="outInterestOnly">$0</div>
+              </div>
+            </div>
+
+            <div class="split">
+              <div class="kpiCard">
+                <div class="k">Net Rental / yr</div>
+                <div class="v" id="outNetRentYr">$0</div>
+              </div>
+              <div class="kpiCard">
+                <div class="k">Rental Yield (gross)</div>
+                <div class="v" id="outYield">0.00%</div>
+              </div>
+            </div>
+
+            <div class="split">
+              <div class="kpiCard">
+                <div class="k">Annual Expense</div>
+                <div class="v" id="outExpenseYr">$0</div>
+              </div>
+              <div class="kpiCard">
+                <div class="k">Net Cashflow / yr (pre-tax)</div>
+                <div class="v" id="outCashflowYrPreTax">$0</div>
+              </div>
+            </div>
+
+            <div class="kpiCard kpiHero">
+              <div class="k">Net Cashflow / month</div>
+              <div class="v" id="outNetCashMonth">$0</div>
+              <div class="hint">Negative = out-of-pocket (shown in brackets)</div>
+            </div>
+
+            <div class="hr"></div>
+
+            <table class="table" aria-label="details">
+              <thead><tr><th>Metric</th><th style="text-align:right">Value</th></tr></thead>
+              <tbody>
+                <tr><td class="label">Deposit</td><td style="text-align:right" class="tiny" id="outDeposit">$0</td></tr>
+                <tr><td class="label">Loan Amount (start)</td><td style="text-align:right" class="tiny" id="outLoanAmt">$0</td></tr>
+                <tr><td class="label">LVR</td><td style="text-align:right" class="tiny" id="outLvr">0%</td></tr>
+                <tr><td class="label">LMI (auto)</td><td style="text-align:right" class="tiny" id="outLmi">$0</td></tr>
+                <tr><td class="label">Stamp Duty (auto)</td><td style="text-align:right" class="tiny" id="outDuty">$0</td></tr>
+                <tr><td class="label">Depreciation / yr (auto)</td><td style="text-align:right" class="tiny" id="outDepr">$0</td></tr>
+                <tr><td class="label">Monthly cashflow (pre-tax)</td><td style="text-align:right" class="tiny" id="outCashPreTax">$0</td></tr>
+                <tr><td class="label">Tax benefit</td><td style="text-align:right" class="tiny" id="outTaxBenefit">$0</td></tr>
+              </tbody>
+            </table>
+
+            <div class="footerNote" id="reportLine"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:16px;">
+      <div class="head">
+        <h2>Advanced</h2>
+        <span class="badge">Portfolio Projection</span>
+      </div>
+
+      <div class="content">
+        <div class="row3">
+          <div>
+            <div class="label">Average Annual Growth %</div>
+            <input id="capGrowthPct" type="number" min="0" step="0.01" placeholder="6.0">
+            <div class="hint">Used to project property value</div>
+          </div>
+          <div>
+            <div class="label">Rental Growth %</div>
+            <input id="rentGrowthPct" type="number" min="0" step="0.01" placeholder="3.0">
+            <div class="hint">Used to project rent (weekly)</div>
+          </div>
+          <div>
+            <div class="label">Cashflow Adjustment %</div>
+            <input id="cashflowGrowthPct" type="number" min="0" step="0.01" placeholder="2.0">
+            <div class="hint">Optional. Grows your net cashflow</div>
+          </div>
+        </div>
+
+        <div class="row2" style="margin-top:10px;">
+          <div>
+            <div class="label">Projection Years</div>
+            <select id="projPreset">
+              <option value="1,2,3,5,10,20,30" selected>1, 2, 3, 5, 10, 20, 30 (recommended)</option>
+              <option value="1,3,5,10,20,30">1, 3, 5, 10, 20, 30</option>
+              <option value="1,2,3,4,5,10,15,20,25,30">More points</option>
+            </select>
+          </div>
+          <div>
+            <div class="label">Projection view</div>
+            <select id="chartView">
+              <option value="value_rent" selected>Value + Rent</option>
+              <option value="value_balance">Value + Loan Balance</option>
+              <option value="equity">Equity (Value - Loan)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <canvas id="portfolioChart" height="160" style="width:100%; display:block;"></canvas>
+          <div class="footerNote" id="chartCaption"></div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <table class="table" aria-label="projection table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th style="text-align:right;">Property Value</th>
+                <th style="text-align:right;">Loan Balance</th>
+                <th style="text-align:right;">Equity</th>
+                <th style="text-align:right;">Rent / week</th>
+                <th style="text-align:right;">Net Cashflow / year</th>
+              </tr>
+            </thead>
+            <tbody id="projectionRows"></tbody>
+          </table>
+        </div>
+
+        <div class="footerNote">
+          Loan balance amortises with standard P&amp;I (fixed payment; balance reduces). Chart includes Year 0 baseline.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+const $ = (id) => document.getElementById(id);
+
+const fmtAUD0 = (n) => (isFinite(n) ? n : 0).toLocaleString("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits:0 });
+const fmtAUD2 = (n) => (isFinite(n) ? n : 0).toLocaleString("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits:2 });
+const fmtPct  = (n) => ((isFinite(n) ? n : 0) * 100).toFixed(2) + "%";
+
+function fmtSignedAUD(n, decimals=2){
+  const v = isFinite(n) ? n : 0;
+  const abs = Math.abs(v).toLocaleString("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits:decimals });
+  if (v < 0) return "(" + abs + ")";
+  return abs;
+}
+function fmtOutflowAUD(n, decimals=0){
+  const v = isFinite(n) ? Math.abs(n) : 0;
+  const abs = v.toLocaleString("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits:decimals });
+  return "(" + abs + ")";
+}
+
+// Monthly payment for amortising loan
+function pmt(rate, nper, pv){
+  if (!isFinite(rate) || !isFinite(nper) || !isFinite(pv) || nper <= 0) return 0;
+  if (rate === 0) return pv / nper;
+  const pow = Math.pow(1 + rate, nper);
+  return (pv * rate * pow) / (pow - 1);
+}
+
+// Remaining balance after m payments (closed form)
+function remainingBalance(pv, rate, payment, m){
+  if (!isFinite(pv) || !isFinite(rate) || !isFinite(payment) || !isFinite(m) || m <= 0) return pv;
+  if (rate === 0) return Math.max(0, pv - payment * m);
+  const pow = Math.pow(1 + rate, m);
+  const bal = pv * pow - payment * ((pow - 1) / rate);
+  return Math.max(0, bal);
+}
+
+// Accept 20 or 0.20
+function parsePercentLoose(x){
+  const v = parseFloat(x);
+  if (!isFinite(v)) return 0;
+  return (v > 1) ? (v / 100) : v;
+}
+function clamp01(x){ return Math.min(1, Math.max(0, x)); }
+
+// Simple LMI schedule (editable later to match your preferred lender table)
+const LMI_TIERS = [
+  { lvrMax: 0.80, rate: 0.0000 },
+  { lvrMax: 0.85, rate: 0.0060 },
+  { lvrMax: 0.90, rate: 0.0120 },
+  { lvrMax: 0.92, rate: 0.0140 },
+  { lvrMax: 0.95, rate: 0.0200 },
+  { lvrMax: 1.00, rate: 0.0300 }
+];
+
+// Approx stamp duty (replace with exact state schedule if you want)
+function calcStampDuty(state, price){
+  if (!isFinite(price) || price <= 0) return 0;
+
+  if (state === "QLD"){
+    if (price <= 540000) return price * 0.0325;
+    return (540000 * 0.0325) + ((price - 540000) * 0.0400);
+  }
+  if (state === "NSW"){
+    if (price <= 1000000) return price * 0.035;
+    return (1000000 * 0.035) + ((price - 1000000) * 0.045);
+  }
+  if (state === "VIC"){
+    if (price <= 960000) return price * 0.050;
+    return (960000 * 0.050) + ((price - 960000) * 0.055);
+  }
+  return price * 0.040;
+}
+
+function calcLmi(lvr, loanAmount){
+  if (!isFinite(lvr) || !isFinite(loanAmount) || loanAmount <= 0) return 0;
+  for (const t of LMI_TIERS){
+    if (lvr <= t.lvrMax) return loanAmount * t.rate;
+  }
+  return loanAmount * 0.03;
+}
+
+function getInputs(){
+  return {
+    address: $("address").value.trim(),
+    state: $("state").value,
+    purchasePrice: parseFloat($("purchasePrice").value) || 0,
+
+    depositPct: parsePercentLoose($("depositPct").value),
+    interestRate: parsePercentLoose($("interestRate").value),
+    rentComm: parsePercentLoose($("rentComm").value),
+
+    loanTermYears: parseFloat($("loanTermYears").value) || 0,
+
+    rentWeek: parseFloat($("rentWeek").value) || 0,
+
+    councilYr: parseFloat($("councilYr").value) || 0,
+    buildingInsYr: parseFloat($("buildingInsYr").value) || 0,
+    landlordInsYr: parseFloat($("landlordInsYr").value) || 0,
+    maintenanceYr: parseFloat($("maintenanceYr").value) || 0,
+    accountingYr: parseFloat($("accountingYr").value) || 0,
+    superYr: parseFloat($("superYr").value) || 0,
+
+    buildingValuePct: parsePercentLoose($("buildingValuePct").value),
+    deprRatePct: parsePercentLoose($("deprRatePct").value),
+
+    taxDeductRatio: parsePercentLoose($("taxDeductRatio").value),
+    taxRate: parsePercentLoose($("taxRate").value),
+
+    capGrowth: parsePercentLoose($("capGrowthPct").value || "6"),
+    rentGrowth: parsePercentLoose($("rentGrowthPct").value || "3"),
+    cashGrowth: parsePercentLoose($("cashflowGrowthPct").value || "0"),
+    years: ($("projPreset").value || "1,2,3,5,10,20,30")
+  };
+}
+
+function compute(i){
+  const depositPct = clamp01(i.depositPct);
+  const rentComm = clamp01(i.rentComm);
+
+  const buildingValuePct = clamp01(i.buildingValuePct || 0.70);
+  const deprRatePct = clamp01(i.deprRatePct || 0.025);
+
+  const taxDeductWasBlank = $("taxDeductRatio").value.trim() === "";
+  const taxDeductRatio = clamp01(taxDeductWasBlank ? 1 : i.taxDeductRatio);
+  const taxRate = clamp01(i.taxRate);
+
+  const loanAmount = i.purchasePrice * (1 - depositPct);
+  const deposit = i.purchasePrice * depositPct;
+  const lvr = (i.purchasePrice > 0) ? (loanAmount / i.purchasePrice) : 0;
+
+  const stampDuty = calcStampDuty(i.state, i.purchasePrice);
+  const lmi = calcLmi(lvr, loanAmount);
+  const cashRequired = deposit + lmi + stampDuty;
+
+  const monthlyRate = i.interestRate / 12;
+  const nper = i.loanTermYears * 12;
+
+  const monthlyPAndI = pmt(monthlyRate, nper, loanAmount);
+
+  const interestPortionMonth1 = loanAmount * i.interestRate / 12;
+
+  const annualExpense =
+    (monthlyPAndI * 12) +
+    i.councilYr + i.buildingInsYr + i.landlordInsYr + i.maintenanceYr + i.accountingYr;
+
+  const netRentYr = i.rentWeek * 52 * (1 - rentComm);
+  const yieldGross = (i.purchasePrice > 0) ? ((i.rentWeek * 52) / i.purchasePrice) : 0;
+
+  const cashflowYrPreTax = netRentYr - annualExpense - i.superYr;
+  const cashflowMonthPreTax = cashflowYrPreTax / 12;
+
+  const depreciationYr = i.purchasePrice * buildingValuePct * deprRatePct;
+
+  const netExpTax = (Math.abs(cashflowYrPreTax) - depreciationYr) * taxDeductRatio;
+  const taxBenefit = netExpTax * taxRate;
+
+  const cashflowYrAfterTax = cashflowYrPreTax + taxBenefit;
+  const cashflowMonthAfterTax = cashflowYrAfterTax / 12;
+
+  return {
+    loanAmount, deposit, lvr,
+    stampDuty, lmi, cashRequired,
+    monthlyRate, nper, monthlyPAndI, interestPortionMonth1,
+    annualExpense, netRentYr, yieldGross,
+    cashflowYrPreTax, cashflowMonthPreTax,
+    depreciationYr, taxBenefit,
+    cashflowYrAfterTax, cashflowMonthAfterTax
+  };
+}
+
+function parseYearsCSV(csv){
+  return csv.split(",").map(s => parseInt(s.trim(),10)).filter(n => Number.isFinite(n) && n >= 0);
+}
+function projectValue(base, annualRate, years){
+  return base * Math.pow(1 + annualRate, years);
+}
+
+function renderProjection(baseComputed, baseInputs){
+  const yearsRaw = parseYearsCSV($("projPreset").value || "1,2,3,5,10,20,30");
+  const years = Array.from(new Set([0, ...yearsRaw])).sort((a,b)=>a-b);
+
+  const capGrowth = parsePercentLoose($("capGrowthPct").value || "6");
+  const rentGrowth = parsePercentLoose($("rentGrowthPct").value || "3");
+  const cashGrowth = parsePercentLoose($("cashflowGrowthPct").value || "0");
+  const view = $("chartView").value;
+
+  const baseValue = baseInputs.purchasePrice;
+  const baseRentWk = baseInputs.rentWeek;
+  const baseNetCashPerYear = baseComputed.cashflowMonthAfterTax * 12;
+
+  const pv = baseComputed.loanAmount;
+  const r = baseComputed.monthlyRate;
+  const payment = baseComputed.monthlyPAndI;
+  const nper = baseComputed.nper;
+
+  const rows = [];
+  const xVals = [];
+  const values = [];
+  const rents = [];
+  const balances = [];
+  const equities = [];
+
+  for(const y of years){
+    const months = Math.min(y * 12, nper);
+    const v = projectValue(baseValue, capGrowth, y);
+    const rw = projectValue(baseRentWk, rentGrowth, y);
+    const bal = remainingBalance(pv, r, payment, months);
+    const eq = Math.max(0, v - bal);
+    const cash = baseNetCashPerYear * Math.pow(1 + cashGrowth, y);
+
+    xVals.push(y);
+    values.push(v);
+    rents.push(rw);
+    balances.push(bal);
+    equities.push(eq);
+
+    if (y !== 0){
+      rows.push({y, v, bal, eq, rw, cash});
+    }
+  }
+
+  $("projectionRows").innerHTML = rows.map(row => `
+    <tr>
+      <td class="label">Year ${row.y}</td>
+      <td style="text-align:right;" class="tiny">${fmtAUD0(row.v)}</td>
+      <td style="text-align:right;" class="tiny">${fmtAUD0(row.bal)}</td>
+      <td style="text-align:right;" class="tiny">${fmtAUD0(row.eq)}</td>
+      <td style="text-align:right;" class="tiny">${fmtAUD2(row.rw)}</td>
+      <td style="text-align:right;" class="tiny">${fmtSignedAUD(row.cash, 0)}</td>
+    </tr>
+  `).join("");
+
+  const canvas = $("portfolioChart");
+  const caption = $("chartCaption");
+
+  if (view === "value_rent"){
+    caption.innerHTML = "Chart shows projected <b>Property Value</b> (left axis) and <b>Weekly Rent</b> (right axis). Includes <b>Year 0</b> baseline.";
+    drawDualAxis(canvas, xVals, values, rents, "Value", "Rent/wk");
+  } else if (view === "value_balance"){
+    caption.innerHTML = "Chart shows projected <b>Property Value</b> (left axis) and <b>Loan Balance</b> (right axis). Includes <b>Year 0</b> baseline.";
+    drawDualAxis(canvas, xVals, values, balances, "Value", "Loan");
+  } else {
+    caption.innerHTML = "Chart shows projected <b>Equity</b> (Value - Loan Balance). Includes <b>Year 0</b> baseline.";
+    drawSingle(canvas, xVals, equities, "Equity");
+  }
+}
+
+function sizeCanvas(canvas){
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const cssW = Math.max(320, rect.width || 0);
+  const cssH = Math.max(140, parseInt(canvas.getAttribute("height") || "160",10));
+  canvas.width = Math.floor(cssW * dpr);
+  canvas.height = Math.floor(cssH * dpr);
+  return { dpr, w: canvas.width, h: canvas.height };
+}
+
+function sanitizeNumbers(arr){
+  return arr.map(v => Number.isFinite(v) ? v : 0);
+}
+function rangeBounds(arr, fallback=0){
+  const finite = arr.filter(Number.isFinite);
+  if (!finite.length) return { min: fallback, max: fallback };
+  return { min: Math.min(...finite), max: Math.max(...finite) };
+}
+function maxOr(arr, fallback=1){
+  const finite = arr.filter(Number.isFinite);
+  if (!finite.length) return fallback;
+  return Math.max(...finite, fallback);
+}
+
+function drawDualAxis(canvas, xVals, leftSeries, rightSeries, leftLabel, rightLabel){
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const { dpr, w, h } = sizeCanvas(canvas);
+  ctx.clearRect(0,0,w,h);
+
+  const padL = 56 * dpr, padR = 20 * dpr, padT = 26 * dpr, padB = 34 * dpr;
+
+  const xs = sanitizeNumbers(xVals);
+  const left = sanitizeNumbers(leftSeries);
+  const right = sanitizeNumbers(rightSeries);
+
+  const { min: xMin, max: xMax } = rangeBounds(xs, 0);
+  const xSpan = xMax - xMin || 1;
+
+  const yLMin = 0;
+  const yLMax = maxOr(left, 1) * 1.06;
+  const yRMin = 0;
+  const yRMax = maxOr(right, 1) * 1.16;
+
+  const yLSpan = yLMax - yLMin || 1;
+  const yRSpan = yRMax - yRMin || 1;
+
+  const xScale = (x) => padL + ((x - xMin) / xSpan) * (w - padL - padR);
+  const yScaleL = (y) => padT + (1 - ((y - yLMin) / yLSpan)) * (h - padT - padB);
+  const yScaleR = (y) => padT + (1 - ((y - yRMin) / yRSpan)) * (h - padT - padB);
+
+  ctx.strokeStyle = "rgba(27,67,50,.14)";
+  ctx.lineWidth = 1 * dpr;
+  for(let i=0;i<=4;i++){
+    const y = padT + i * ((h - padT - padB)/4);
+    ctx.beginPath();
+    ctx.moveTo(padL, y);
+    ctx.lineTo(w - padR, y);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "rgba(16,20,18,.65)";
+  ctx.font = `${12*dpr}px ${getComputedStyle(document.body).fontFamily}`;
+
+  for(let i=0;i<=4;i++){
+    const frac = 1 - i/4;
+    const v = yLMin + frac * (yLMax - yLMin);
+    const y = padT + i * ((h - padT - padB)/4);
+    ctx.fillText((v/1000).toFixed(0) + "k", 8*dpr, y + 4*dpr);
+  }
+
+  for(let i=0;i<=4;i++){
+    const frac = 1 - i/4;
+    const v = yRMin + frac * (yRMax - yRMin);
+    const y = padT + i * ((h - padT - padB)/4);
+    const label = (rightLabel === "Loan" || rightLabel === "Value") ? ((v/1000).toFixed(0) + "k") : ("$" + v.toFixed(0));
+    const tw = ctx.measureText(label).width;
+    ctx.fillText(label, (w - padR - tw), y + 4*dpr);
+  }
+
+  xs.forEach((x) => {
+    const px = xScale(x);
+    const label = "Y" + x;
+    const tw = ctx.measureText(label).width;
+    ctx.fillText(label, px - tw/2, h - 12*dpr);
+  });
+
+  ctx.strokeStyle = "#1B4332";
+  ctx.lineWidth = 2.5 * dpr;
+  ctx.beginPath();
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScaleL(left[idx]);
+    if(idx === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  ctx.fillStyle = "#1B4332";
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScaleL(left[idx]);
+    ctx.beginPath();
+    ctx.arc(px, py, 3.5*dpr, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  ctx.strokeStyle = "#D4AF37";
+  ctx.lineWidth = 2.5 * dpr;
+  ctx.beginPath();
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScaleR(right[idx]);
+    if(idx === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  ctx.fillStyle = "#D4AF37";
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScaleR(right[idx]);
+    ctx.beginPath();
+    ctx.arc(px, py, 3.5*dpr, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  const lx = padL, ly = padT - 10*dpr;
+  ctx.fillStyle = "rgba(16,20,18,.75)";
+  ctx.fillText(leftLabel, lx + 18*dpr, ly);
+  ctx.fillText(rightLabel, lx + 112*dpr, ly);
+
+  ctx.fillStyle = "#1B4332";
+  ctx.fillRect(lx, ly - 10*dpr, 12*dpr, 12*dpr);
+  ctx.fillStyle = "#D4AF37";
+  ctx.fillRect(lx + 92*dpr, ly - 10*dpr, 12*dpr, 12*dpr);
+}
+
+function drawSingle(canvas, xVals, series, label){
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const { dpr, w, h } = sizeCanvas(canvas);
+  ctx.clearRect(0,0,w,h);
+
+  const padL = 56 * dpr, padR = 20 * dpr, padT = 26 * dpr, padB = 34 * dpr;
+
+  const xs = sanitizeNumbers(xVals);
+  const ys = sanitizeNumbers(series);
+
+  const yMin = 0;
+  const yMax = maxOr(ys, 1) * 1.06;
+
+  const { min: xMin, max: xMax } = rangeBounds(xs, 0);
+  const xSpan = xMax - xMin || 1;
+  const ySpan = yMax - yMin || 1;
+
+  const xScale = (x) => padL + ((x - xMin) / xSpan) * (w - padL - padR);
+  const yScale = (y) => padT + (1 - ((y - yMin) / ySpan)) * (h - padT - padB);
+
+  ctx.strokeStyle = "rgba(27,67,50,.14)";
+  ctx.lineWidth = 1 * dpr;
+  for(let i=0;i<=4;i++){
+    const y = padT + i * ((h - padT - padB)/4);
+    ctx.beginPath();
+    ctx.moveTo(padL, y);
+    ctx.lineTo(w - padR, y);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "rgba(16,20,18,.65)";
+  ctx.font = `${12*dpr}px ${getComputedStyle(document.body).fontFamily}`;
+
+  for(let i=0;i<=4;i++){
+    const frac = 1 - i/4;
+    const v = yMin + frac * (yMax - yMin);
+    const y = padT + i * ((h - padT - padB)/4);
+    ctx.fillText((v/1000).toFixed(0) + "k", 8*dpr, y + 4*dpr);
+  }
+
+  xs.forEach((x) => {
+    const px = xScale(x);
+    const labelX = "Y" + x;
+    const tw = ctx.measureText(labelX).width;
+    ctx.fillText(labelX, px - tw/2, h - 12*dpr);
+  });
+
+  ctx.strokeStyle = "#1B4332";
+  ctx.lineWidth = 2.5 * dpr;
+  ctx.beginPath();
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScale(ys[idx]);
+    if(idx === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  ctx.fillStyle = "#1B4332";
+  xs.forEach((x, idx) => {
+    const px = xScale(x);
+    const py = yScale(ys[idx]);
+    ctx.beginPath();
+    ctx.arc(px, py, 3.5*dpr, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  const lx = padL, ly = padT - 10*dpr;
+  ctx.fillStyle = "rgba(16,20,18,.75)";
+  ctx.fillText(label, lx + 18*dpr, ly);
+  ctx.fillStyle = "#1B4332";
+  ctx.fillRect(lx, ly - 10*dpr, 12*dpr, 12*dpr);
+}
+
+function render(){
+  const i = getInputs();
+  const o = compute(i);
+
+  $("outDeposit").textContent = fmtAUD0(o.deposit);
+  $("outLoanAmt").textContent = fmtAUD0(o.loanAmount);
+  $("outLvr").textContent = fmtPct(o.lvr);
+
+  $("outLmi").textContent = fmtAUD0(o.lmi);
+  $("outDuty").textContent = fmtAUD0(o.stampDuty);
+  $("outDepr").textContent = fmtAUD0(o.depreciationYr);
+
+  $("outCashRequired").textContent = fmtAUD0(o.cashRequired);
+  $("outCashRequiredSub").textContent = `Deposit ${fmtAUD0(o.deposit)} + LMI ${fmtAUD0(o.lmi)} + Duty ${fmtAUD0(o.stampDuty)}`;
+
+  $("outMonthlyPAndI").textContent = fmtAUD2(o.monthlyPAndI);
+  $("outInterestOnly").textContent = fmtAUD2(o.interestPortionMonth1);
+
+  $("outNetRentYr").textContent = fmtAUD0(o.netRentYr);
+  $("outYield").textContent = fmtPct(o.yieldGross);
+
+  $("outExpenseYr").textContent = fmtOutflowAUD(o.annualExpense, 0);
+  $("outCashflowYrPreTax").textContent = fmtSignedAUD(o.cashflowYrPreTax, 0);
+  $("outCashPreTax").textContent = fmtSignedAUD(o.cashflowMonthPreTax, 2);
+
+  $("outTaxBenefit").textContent = fmtAUD2(o.taxBenefit);
+  $("outNetCashMonth").textContent = fmtSignedAUD(o.cashflowMonthAfterTax, 2);
+
+  const addr = i.address ? i.address : "Property";
+  const ir = parsePercentLoose($("interestRate").value) * 100;
+  $("reportLine").textContent =
+    `${addr} (${i.state}) • Purchase ${fmtAUD0(i.purchasePrice)} • LVR ${(o.lvr*100).toFixed(1)}% • Rate ${isFinite(ir)?ir.toFixed(2):"0.00"}% • Net cashflow ${fmtSignedAUD(o.cashflowMonthAfterTax,2)}/mo`;
+
+  requestAnimationFrame(() => renderProjection(o, i));
+}
+
+const sample = {
+  address: "5 Henschke Court, Caboolture QLD 4510",
+  state: "QLD",
+  purchasePrice: 565000,
+  depositPct: 0.20,
+  interestRate: 0.055,
+  loanTermYears: 30,
+  rentWeek: 550,
+  rentComm: 0.08,
+  councilYr: 4000,
+  buildingInsYr: 1500,
+  landlordInsYr: 500,
+  maintenanceYr: 3000,
+  accountingYr: 0,
+  superYr: 0,
+  buildingValuePct: 0.70,
+  deprRatePct: 0.025,
+  taxDeductRatio: 1.00,
+  taxRate: 0.30,
+  capGrowthPct: 6,
+  rentGrowthPct: 3,
+  cashflowGrowthPct: 2
+};
+
+function setForm(v){
+  $("address").value = v.address ?? "";
+  $("state").value = v.state ?? "QLD";
+  $("purchasePrice").value = v.purchasePrice ?? 0;
+
+  $("depositPct").value = ((v.depositPct ?? 0) * 100).toFixed(0);
+  $("interestRate").value = ((v.interestRate ?? 0) * 100).toFixed(2);
+  $("loanTermYears").value = v.loanTermYears ?? 30;
+
+  $("rentWeek").value = v.rentWeek ?? 0;
+  $("rentComm").value = ((v.rentComm ?? 0) * 100).toFixed(0);
+
+  $("councilYr").value = v.councilYr ?? 0;
+  $("buildingInsYr").value = v.buildingInsYr ?? 0;
+  $("landlordInsYr").value = v.landlordInsYr ?? 0;
+  $("maintenanceYr").value = v.maintenanceYr ?? 0;
+  $("accountingYr").value = v.accountingYr ?? 0;
+  $("superYr").value = v.superYr ?? 0;
+
+  $("buildingValuePct").value = ((v.buildingValuePct ?? 0.70) * 100).toFixed(0);
+  $("deprRatePct").value = ((v.deprRatePct ?? 0.025) * 100).toFixed(2);
+
+  $("taxDeductRatio").value = ((v.taxDeductRatio ?? 1) * 100).toFixed(0);
+  $("taxRate").value = ((v.taxRate ?? 0.30) * 100).toFixed(0);
+
+  $("capGrowthPct").value = (v.capGrowthPct ?? 6).toString();
+  $("rentGrowthPct").value = (v.rentGrowthPct ?? 3).toString();
+  $("cashflowGrowthPct").value = (v.cashflowGrowthPct ?? 2).toString();
+
+  $("projPreset").value = "1,2,3,5,10,20,30";
+  $("chartView").value = "value_rent";
+  render();
+}
+
+const inputs = [
+  "address","state","purchasePrice","depositPct","interestRate","loanTermYears",
+  "rentWeek","rentComm",
+  "councilYr","buildingInsYr","landlordInsYr","maintenanceYr","accountingYr","superYr",
+  "buildingValuePct","deprRatePct","taxDeductRatio","taxRate",
+  "capGrowthPct","rentGrowthPct","cashflowGrowthPct","projPreset","chartView"
+];
+
+inputs.forEach(id => $(id).addEventListener("input", render));
+$("state").addEventListener("change", render);
+$("projPreset").addEventListener("change", render);
+$("chartView").addEventListener("change", render);
+
+(function attachResizeObserver(){
+  const canvas = $("portfolioChart");
+  if (!canvas) return;
+  const rerender = () => requestAnimationFrame(render);
+  window.addEventListener("resize", rerender);
+  if ("ResizeObserver" in window){
+    const ro = new ResizeObserver(rerender);
+    ro.observe(canvas);
+    if (canvas.parentElement) ro.observe(canvas.parentElement);
+  }
+})();
+
+$("btnReset").addEventListener("click", () => setForm(sample));
+
+$("btnExport").addEventListener("click", async () => {
+  const json = JSON.stringify(getInputs(), null, 2);
+  try{
+    await navigator.clipboard.writeText(json);
+    alert("Copied inputs to clipboard.");
+  }catch(e){
+    const w = window.open();
+    w.document.write(`<pre>${json.replace(/[<>]/g, s => ({'<':'&lt;','>':'&gt;'}[s]))}</pre>`);
+    w.document.close();
+  }
+});
+
+window.addEventListener("load", () => setTimeout(() => setForm(sample), 0));
+
+  </script>
+</body>
+</html>
