@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Smart Gain Properties • Cashflow Portal</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="./favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -271,7 +271,7 @@ input:focus, select:focus{
     <header>
       <div class="title">
         <div class="brandline">
-          <img src="Logo Full - Color.png" alt="Smart Gain Properties logo" class="brandLogo">
+          <img src="./Logo Full - Color.png" alt="Smart Gain Properties logo" class="brandLogo">
           <div class="b">SMART GAIN PROPERTIES</div>
         </div>
         <div class="eyebrow"><span class="dot" aria-hidden="true"></span>Cashflow &amp; Portfolio Snapshot</div>
@@ -1034,7 +1034,12 @@ function render(){
   $("reportLine").textContent =
     `${addr} (${i.state}) • Purchase ${fmtAUD0(i.purchasePrice)} • LVR ${(o.lvr*100).toFixed(1)}% • Rate ${isFinite(ir)?ir.toFixed(2):"0.00"}% • Net cashflow ${fmtSignedAUD(o.cashflowMonthAfterTax,2)}/mo`;
 
-  requestAnimationFrame(() => renderProjection(o, i));
+  const draw = () => renderProjection(o, i);
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(draw);
+  } else {
+    draw();
+  }
 }
 
 const sample = {
